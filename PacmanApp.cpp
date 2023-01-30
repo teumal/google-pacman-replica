@@ -272,6 +272,7 @@ bool PacmanApp::LoadSound(const wchar_t strFileName[]) {
    });
 
    ReadChunkData(hFile, audioList.back().pDataBuffer, dwChunkSize, dwChunkPosition);
+   CloseHandle(hFile);
    return true;
 }
 

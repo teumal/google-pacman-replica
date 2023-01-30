@@ -214,64 +214,6 @@ bool PacmanApp::Init(HINSTANCE hInstance, int nWidth, int nHeight) {
        return false;
    }
 
-
-   // 
-   /*HRSRC hrSrc;
-
-   HGLOBAL hSnd1 = LoadResource(
-       hInstance,
-       hrSrc = FindResourceW(hInstance, MAKEINTRESOURCE(IDR_WAVE1),  L"WAVE")
-   );
-
-   HGLOBAL hSnd2 = LoadResource(
-       hInstance,
-       hrSrc = FindResourceW(hInstance, MAKEINTRESOURCE(IDR_WAVE2),  L"WAVE" )
-   );
-
-   HGLOBAL hSnd3 = LoadResource(
-       hInstance,
-       hrSrc = FindResourceW(hInstance, MAKEINTRESOURCE(IDR_WAVE3),  L"WAVE" )
-   );
-
-   HGLOBAL hSnd4 = LoadResource(
-       hInstance,
-       hrSrc = FindResourceW(hInstance, MAKEINTRESOURCE(IDR_WAVE4),  L"WAVE" )
-   );
-
-   HGLOBAL hSnd5 = LoadResource(
-       hInstance,
-       hrSrc = FindResourceW(hInstance, MAKEINTRESOURCE(IDR_WAVE5),  L"WAVE" )
-   );
-
-   HGLOBAL hSnd6 = LoadResource(
-       hInstance,
-       hrSrc = FindResourceW(hInstance, MAKEINTRESOURCE(IDR_WAVE6),  L"WAVE" )
-   );
-   HGLOBAL hSnd7 = LoadResource(
-       hInstance,
-       hrSrc = FindResourceW(hInstance, MAKEINTRESOURCE(IDR_WAVE7), L"WAVE" )
-   );
-
-   HGLOBAL hSnd8 = LoadResource(
-       hInstance,
-       hrSrc = FindResourceW(hInstance, MAKEINTRESOURCE(IDR_WAVE8),  L"WAVE" )
-   );
-
-   HGLOBAL hSnd9 = LoadResource(
-       hInstance,
-       hrSrc = FindResourceW(hInstance, MAKEINTRESOURCE(IDR_WAVE9),  L"WAVE" )
-   );*/
-
-   /*LoadSound(hSnd1);
-   LoadSound(hSnd2);
-   LoadSound(hSnd3);
-   LoadSound(hSnd4);
-   LoadSound(hSnd5);
-   LoadSound(hSnd6);
-   LoadSound(hSnd7);
-   LoadSound(hSnd8);
-   LoadSound(hSnd9);*/
-
    return true;
 }
 
@@ -293,6 +235,7 @@ bool PacmanApp::LoadSound(const wchar_t strFileName[]) {
    }
 
    if (INVALID_SET_FILE_POINTER == SetFilePointer(hFile, 0, NULL, FILE_BEGIN) ) {
+       CloseHandle(hFile);
        return false;
    }
 
@@ -306,6 +249,7 @@ bool PacmanApp::LoadSound(const wchar_t strFileName[]) {
    ReadChunkData(hFile, &filetype, sizeof(DWORD), dwChunkPosition);
 
    if (filetype != fourccWAVE) {
+       CloseHandle(hFile);
        return false;
    }
 
@@ -339,7 +283,6 @@ bool PacmanApp::StartSound(UINT sndID, float playLength) {
            auto& curAudio = audioList[sndID];
            const auto SampleSize = (curAudio.dwChunkSize * 8) / (curAudio.wfx.Format.wBitsPerSample * curAudio.wfx.Format.nChannels);
 
-          
            if (curAudio.pSourceVoice) {
                XAUDIO2_VOICE_STATE voiceState;
                curAudio.pSourceVoice->GetState(&voiceState);
@@ -355,7 +298,6 @@ bool PacmanApp::StartSound(UINT sndID, float playLength) {
            buffer.Flags      = XAUDIO2_END_OF_STREAM; // tell the source voice not to expect any data after the buffer.
            buffer.PlayBegin  = 0;
            buffer.PlayLength = SampleSize * playLength;
-           curAudio.wfx;
 
            if (curAudio.pSourceVoice==nullptr && FAILED(pXAudio2->CreateSourceVoice(&curAudio.pSourceVoice, (WAVEFORMATEX*)&curAudio.wfx)) ) {
                return false;

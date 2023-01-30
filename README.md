@@ -11,11 +11,11 @@ google-pacman replica with WIN32 API
 - 휴식 시간 추가.
 - 고스트들이 중간 통로를 이용시, 급격히 느려져야 함.
 
-## How to
+## Description
 ``Pacman`` 폴더에 있는 ``Pacman final.exe`` 를 실행시키는 것으로 플레이 가능합니다. 방향키로 팩맨을 조종할 수 있으며, 화면에 있는 모든 쿠키를 먹게되면 승리합니다. 
 
-<img src="https://github.com/teumal/google-pacman-replica/blob/main/ezgif.com-gif-maker.gif?raw=true"></img><br>
-고스트들은 일반적으로 팩맨보다 이동속도가 조금 빠르지만, 커브를 돌 때 항상 직각으로 돕니다. 반면, 팩맨은 곡선으로 돌기 때문에 미로에서 커브를 여러 번 돌면 고스트들을 따돌리는게 가능합니다. 
+<img src="https://github.com/teumal/google-pacman-replica/blob/main/ezgif.com-gif-maker.gif?raw=true"></img><img src="https://github.com/teumal/google-pacman-replica/blob/main/ghost%20curve%20to.gif?raw=true"></img><br>
+고스트들은 일반적으로 팩맨보다 이동속도가 조금 빠르지만, 커브를 돌 때 항상 절도 있게, 직각으로 돕니다. 반면, 팩맨은 곡선으로 돌기 때문에 미로에서 커브를 여러 번 돌면 고스트들을 따돌리는게 가능합니다. 
 
 
 
